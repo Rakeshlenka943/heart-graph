@@ -58,10 +58,21 @@
       width: 100%;
       accent-color: #ee9ca7;
     }
-    .equation {
+    .message {
       font-size: 1.1em;
       margin-bottom: 14px;
       text-align: center;
+      color: #c0392b;
+      font-weight: bold;
+    }
+    .subtext {
+      font-size: 1em;
+      margin-top: 10px;
+      color: #a94442;
+      text-align: center;
+      font-style: italic;
+      font-family: 'Brush Script MT', cursive, Arial, sans-serif;
+      letter-spacing: 0.5px;
     }
     @media (max-width: 500px) {
       .container {
@@ -80,21 +91,25 @@
 </head>
 <body>
   <div class="container">
-    <div class="equation">
-      <b>y = (|x|)<sup>2/3</sup> + 0.9·sin(kx)·√(3−x²)</b>
+    <div class="message">
+      My heart beats with happiness every time you say,<br>
+      <span style="color:#8e44ad; font-size:1.1em;">“wo bhai hai mera”</span>.<br>
+      Here’s a gift from your brother, whose heart fills with joy as you slide the magic below.
     </div>
     <canvas id="graph" width="350" height="350"></canvas>
     <div class="slider-row">
-      <label for="kSlider">k:</label>
+      <label for="kSlider">my happiness:</label>
       <input type="range" id="kSlider" min="0" max="100" step="1" value="0">
       <span id="kValue">0</span>
     </div>
+    <div class="subtext" id="slideMagic">slide to see magic</div>
   </div>
   <script>
     const canvas = document.getElementById('graph');
     const ctx = canvas.getContext('2d');
     const kSlider = document.getElementById('kSlider');
     const kValue = document.getElementById('kValue');
+    const slideMagic = document.getElementById('slideMagic');
 
     function drawGraph(k) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -176,6 +191,8 @@
       const k = Number(kSlider.value);
       kValue.textContent = k;
       drawGraph(k);
+      // Optionally, you could update the magic text or hide it after sliding
+      // For now it always shows unless you want to hide it after first slide
     });
   </script>
 </body>
