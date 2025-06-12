@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Heart Curve Graph</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+      padding: 24px 16px 16px 16px;
+      max-width: 95vw;
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #bbb;
+      width: 100%;
+      height: auto;
+      max-width: 350px;
+      max-height: 350px;
+      display: block;
+      margin-bottom: 20px;
+    }
+    label {
+      font-size: 1.1em;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 350px;
+      margin-top: 6px;
+    }
+    input[type=range] {
+      width: 100%;
+      accent-color: #ee9ca7;
+    }
+    .equation {
+      font-size: 1.1em;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    @media (max-width: 500px) {
+      .container {
+        width: 98vw;
+        padding: 8px;
+      }
+      canvas {
+        max-width: 95vw;
+        max-height: 50vw;
+      }
+      .slider-row {
+        max-width: 95vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="equation">
+      <b>y = (|x|)<sup>2/3</sup> + 0.9·sin(kx)·√(3−x²)</b>
+    </div>
+    <canvas id="graph" width="350" height="350"></canvas>
+    <div class="slider-row">
+      <label for="kSlider">k:</label>
+      <input type="range" id="kSlider" min="0" max="100" step="1" value="0">
+      <span id="kValue">0</span>
+    </div>
+  </div>
+  <script>
+    const canvas = document.getElementById('graph');
+    const ctx = canvas.getContext('2d');
+    const kSlider = document.getElementById('kSlider');
+    const kValue = document.getElementById('kValue');
+
+    function drawGraph(k) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Draw background hearts
+      ctx.save();
+      ctx.globalAlpha = 0.08;
+      drawHeart(canvas.width/2, canvas.height/2, 120, '#ee9ca7');
+      ctx.globalAlpha = 0.04;
+      drawHeart(canvas.width/2, canvas.height/2, 180, '#ee9ca7');
+      ctx.restore();
+
+      // Draw axes
+      ctx.save();
+      ctx.strokeStyle = "#bbb";
+      ctx.lineWidth = 1;
+      // x axis
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height/2);
+      ctx.lineTo(canvas.width, canvas.height/2);
+      ctx.stroke();
+      // y axis
+      ctx.beginPath();
+      ctx.moveTo(canvas.width/2, 0);
+      ctx.lineTo(canvas.width/2, canvas.height);
+      ctx.stroke();
+      ctx.restore();
+
+      // Graph params
+      const xMin = -2.2;
+      const xMax = 2.2;
+      const yMin = -2;
+      const yMax = 3;
+      const N = 400;
+      // Plot the curve
+      ctx.save();
+      ctx.beginPath();
+      for (let i=0; i<=N; ++i) {
+        const x = xMin + (xMax-xMin)*i/N;
+        const abs_x = Math.abs(x);
+        const sqrt_part = Math.sqrt(Math.max(0, 3-x*x));
+        let y = Math.pow(abs_x, 2/3) + 0.9 * Math.sin(k*x) * sqrt_part;
+        // Scale to canvas
+        const px = (x - xMin) / (xMax - xMin) * canvas.width;
+        const py = canvas.height - (y - yMin) / (yMax - yMin) * canvas.height;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = "#c0392b";
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = "#ee9ca7";
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Draw a heart background
+    function drawHeart(cx, cy, size, color) {
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let t = 0; t <= Math.PI; t += 0.01) {
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+        const px = cx + size * x / 32;
+        const py = cy - size * y / 32;
+        if (t === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Initial draw
+    drawGraph(0);
+
+    // Event
+    kSlider.addEventListener('input', function() {
+      const k = Number(kSlider.value);
+      kValue.textContent = k;
+      drawGraph(k);
+    });
+  </script>
+</body>
+</html>
