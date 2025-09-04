@@ -1,41 +1,28 @@
-# 🌟 My First Project – With Love for My Sisters 🌟
+# 💖 Heart Graph  
 
-Hey there 👋,  
+<p align="center">
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3RvYXk1Z3ZnaDRmM2h2bWxxa2doNWdidXRuM3l4b2RmcGFvOHZwNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SzcUO9XlT593W/giphy.gif" width="300" />
+</p>
 
-This is my very first project on **[GitHub](https://github.com/)**, and I’m super excited to share it.  
-But this project isn’t just about me – it’s dedicated to **my two sisters**, whom I love the most. 💙  
-
----
-
-## 🚀 What’s Inside?
-- My first steps in **Frontend Development**  
-- Simple practice projects with **[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)**, **[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)**, and **[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)**  
-- A starting point for everything I’ll be building in the future  
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF69B4&center=true&vCenter=true&width=500&lines=Hey%2C+it's+my+first+project!;Made+with+love+for+my+two+sisters;If+you+like+it%2C+you+can+use+it+too+%F0%9F%92%93" alt="Typing SVG" />
+</p>
 
 ---
 
-## ❤️ Why I’m Doing This
-I’m learning to code not just for myself, but also for my family.  
-This repo is the beginning of a journey where I aim to create meaningful projects and grow as a developer.  
+## ✨ About This Project
+This is my **first coding project**, built with ❤️ for my **two sisters**.  
+It’s simple, but it means a lot to me — a small step in my coding journey.  
+
+If you find it useful or just want to share the love, feel free to **use it too!** 💌  
 
 ---
 
-## 🌍 Can You Use This?
-Absolutely ✅  
-If you’re also starting out, feel free to explore, fork, and use these simple projects.  
-Let’s learn and build cool things together!  
+## 🚀 Quick Start  
 
----
+Clone this repo and run the file:  
 
-## 🔗 Connect with Me
-- 📂 My GitHub profile: [Rakesh Lenka](https://github.com/USERNAME)  
-- 🌐 Learning resources I follow: [MDN Web Docs](https://developer.mozilla.org/)  
-
----
-
-### ✨ Final Note
-This is just the beginning.  
-A repo born out of love, curiosity, and dedication.  
-If you like it, don’t forget to ⭐ this repo!  
-
-> *“Every expert was once a beginner.”*
+```bash
+git clone https://github.com/Rakeshlenka943/heart-graph.git
+cd heart-graph
+python heart.py
